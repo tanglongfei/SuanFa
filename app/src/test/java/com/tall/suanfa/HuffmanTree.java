@@ -45,7 +45,10 @@ public class HuffmanTree {
 
     }
 
-
+    /**
+     * 展示树
+     * @param root
+     */
     public void showHuffman(TreeNode root) {
         LinkedList<TreeNode> list = new LinkedList<>();
         //linkedlist 使用add时作为list使用
@@ -125,6 +128,10 @@ public class HuffmanTree {
     }
 
 
+    /**
+     * 结点
+     * @param <T>
+     */
     public static class TreeNode<T> implements Comparable<TreeNode<T>> {
         T data;
         int weight;
