@@ -15,13 +15,35 @@ public class ExampleUnitTest {
         assertEquals(4, 2 + 2);
 
         int[] array = new int[]{1, 3, 5, 2, 8, 6, 4, 5, 99, 2};
-      //  bubbleSort(array);
+        //  bubbleSort(array);
         selectSort(array);
         for (int i : array) {
             System.out.println(i);
         }
     }
 
+
+    /**
+     * 二叉排序树
+     */
+    @Test
+    public void SearchTest() throws Exception {
+
+        SearchBinaryTree tree = new SearchBinaryTree();
+        tree.put(2);
+        tree.put(1);
+        tree.put(4);
+        tree.put(5);
+        tree.put(3);
+        tree.put(9);
+        tree.put(8);
+
+
+
+        SearchBinaryTree.TreeNode node = tree.searchNode(9);
+        tree.delNode(node);
+        tree.midOrderTraverse(tree.root);
+    }
 
     /**
      * 冒泡
