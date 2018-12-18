@@ -19,6 +19,140 @@
 ### 3.简单二叉树遍历，汉诺塔问题，斐波那契数列
 ### 4.寻路算法及示例
 ### 5.哈夫曼树
-### 6.平衡二叉树（二叉树的左旋，右旋转等）
+### 6.二叉排序树  
+- 原理：  
+1.若左子树不为空，那么所有左子树上面的所有节点的关键字值都比根节点的小。  
+2.若右子树不为空，那么所有右子树上面的所有节点的关键字值都比根节点的大。  
+3.左右子树都为二叉树。     
+4.没有重复值。  
+- 特性：  
+二叉排序树的中序遍历（LDR）顺序为升序排列。  
+- 结点操作-删除结点：    
+删除结点要分别判断几种情况：  
+1.被删除节点左右子树都为空，即为根节点，直接删除。  
+2.被删除节点左子树为空并且右子树不为空，直接补上右子树。     
+3.被删除节点右子树为空并且左子树不为空，直接补上左子树。    
+4.被删除结点左右子树都不为空：  
+(1):如果被删除节点的右子树的左子树为空，则直接补上右子树。    
+(2):如果被删除节点的右子树的左子树不为空，则把被删除节点右子树的最子树中最小的值节点放到被删除节点的位置，该节点的右子树作为该节点父节点的左子树。  
+（以上所有条件中都需要判断被删除节点的父节点是否为空，被删除节点是父节点的左子树还是右子树）   
+截取删除操作代码：
+```
+ //删除结点
+    public void delNode(TreeNode node) {
+        if (node == null) {
+            throw new NoSuchElementException();
+        } else if (searchNode(node.data) == null) {
+            throw new NoSuchElementException();
+        } else {
+            //先得到父亲，方便后面的操作
+            TreeNode parent = node.parent;
+            //1.叶子
+            if (node.leftChind == null && node.rightChind == null) {
+                //特殊情况：只有一个结点或者是空树
+                if (parent == null) {
+                    root = null;
+                } else if (parent.leftChind == node) {
+                    parent.leftChind = null;
+                    node.parent = null;
+                } else if (parent.rightChind == node) {
+                    parent.rightChind = null;
+                    node.parent = null;
+                }
+
+            } else if (node.leftChind != null && node.rightChind == null) {
+                //2.只有左孩子
+                if (parent == null) {//要删除的是根结点
+                    node.leftChind.parent = null;
+                    root = node.leftChind;
+                    node.leftChind = null;
+
+                } else {
+                    if (node == parent.leftChind) {//要删除的是父亲的左边
+                        node.leftChind.parent = parent;
+                        parent.leftChind = node.leftChind;
+                    } else {//要删除的是父亲的右边
+                        node.leftChind.parent = parent;
+                        parent.rightChind = node.leftChind;
+                    }
+                    node.leftChind = null;
+                    node.parent = null;
+
+
+                }
+
+            } else if (node.leftChind == null && node.rightChind != null) {
+                //3.只有右孩子
+                if (parent == null) {//要删除的是根结点
+                    node.rightChind.parent = null;
+                    root = node.rightChind;
+                    node.rightChind = null;
+                } else {
+                    if (node == parent.leftChind) {//要删除的是父亲的左边
+                        node.rightChind.parent = parent;
+                        parent.leftChind = node.rightChind;
+
+                    } else {//要删除的是父亲的右边
+                        node.rightChind.parent = parent;
+                        parent.rightChind = node.rightChind;
+                    }
+
+                    node.parent = null;
+                    node.rightChind = null;
+
+                }
+
+            } else {
+                //4.有两个孩子
+                if (node.rightChind.leftChind == null) {//如果被删除结点的右子树的左子树为空，则直接补上
+                    node.rightChind.leftChind = node.leftChind;
+
+                    if (node.parent == null) {
+                        root = node.rightChind;
+
+                    } else {
+                        if (node.leftChind == node) {
+                            parent.leftChind = node.rightChind;
+                        } else {
+                            parent.rightChind = node.rightChind;
+
+                        }
+                        node.parent = null;
+                    }
+
+
+                } else {//否则就补上被删除结点的右子树的左子树中最小的一个
+
+                    TreeNode leftTreeNode = getMinLeftTreeNode(node.rightChind);
+                    leftTreeNode.parent.leftChind = null;
+                    leftTreeNode.leftChind = node.leftChind;
+                    TreeNode leftP = leftTreeNode.parent;
+                    leftP.leftChind = leftP.rightChind;
+                    leftTreeNode.parent = parent;
+                    if (parent == null) {
+                        root = leftTreeNode;
+                    } else {
+                        if (parent.leftChind == node) {
+                            parent.leftChind = leftTreeNode;
+                        } else {
+                            parent.rightChind = leftTreeNode;
+                        }
+
+                        node.parent = null;
+                    }
+
+                }
+
+                node.leftChind = null;
+                node.rightChind = null;
+
+            }
+
+
+        }
+    }
+
+```
+### 7.平衡二叉树（二叉树的左旋，右旋转等）
 
 ## 后续还在不断学习更新······
