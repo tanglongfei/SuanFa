@@ -77,7 +77,6 @@
                     node.leftChind = null;
                     node.parent = null;
                 }
-
             } else if (node.leftChind == null && node.rightChind != null) {
                 //3.只有右孩子
                 if (parent == null) {//要删除的是根结点
@@ -96,7 +95,6 @@
                     node.parent = null;
                     node.rightChind = null;
                 }
-
             } else {
                 //4.有两个孩子
                 if (node.rightChind.leftChind == null) {//如果被删除结点的右子树的左子树为空，则直接补上
