@@ -24,7 +24,7 @@ public class ExampleUnitTest {
 
 
     /**
-     * 二叉排序树
+     * 二叉排序树测试
      */
     @Test
     public void SearchTest() throws Exception {
@@ -43,6 +43,24 @@ public class ExampleUnitTest {
         SearchBinaryTree.TreeNode node = tree.searchNode(9);
         tree.delNode(node);
         tree.midOrderTraverse(tree.root);
+    }
+
+    /**
+     * 平衡二叉树测试
+     */
+    @Test
+    public void AVLBTest() throws Exception {
+        AVLBTree tree = new AVLBTree();
+
+        tree.insertElement(3);
+        tree.insertElement(2);
+        tree.insertElement(5);
+        tree.insertElement(4);
+        tree.insertElement(7);
+        tree.insertElement(6);
+
+
+        tree.showAVL(tree.root);
     }
 
     /**
