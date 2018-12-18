@@ -66,7 +66,6 @@
                     node.leftChind.parent = null;
                     root = node.leftChind;
                     node.leftChind = null;
-
                 } else {
                     if (node == parent.leftChind) {//要删除的是父亲的左边
                         node.leftChind.parent = parent;
@@ -77,8 +76,6 @@
                     }
                     node.leftChind = null;
                     node.parent = null;
-
-
                 }
 
             } else if (node.leftChind == null && node.rightChind != null) {
@@ -96,33 +93,25 @@
                         node.rightChind.parent = parent;
                         parent.rightChind = node.rightChind;
                     }
-
                     node.parent = null;
                     node.rightChind = null;
-
                 }
 
             } else {
                 //4.有两个孩子
                 if (node.rightChind.leftChind == null) {//如果被删除结点的右子树的左子树为空，则直接补上
                     node.rightChind.leftChind = node.leftChind;
-
                     if (node.parent == null) {
                         root = node.rightChind;
-
                     } else {
                         if (node.leftChind == node) {
                             parent.leftChind = node.rightChind;
                         } else {
                             parent.rightChind = node.rightChind;
-
                         }
                         node.parent = null;
                     }
-
-
                 } else {//否则就补上被删除结点的右子树的左子树中最小的一个
-
                     TreeNode leftTreeNode = getMinLeftTreeNode(node.rightChind);
                     leftTreeNode.parent.leftChind = null;
                     leftTreeNode.leftChind = node.leftChind;
@@ -137,18 +126,12 @@
                         } else {
                             parent.rightChind = leftTreeNode;
                         }
-
                         node.parent = null;
                     }
-
                 }
-
                 node.leftChind = null;
                 node.rightChind = null;
-
             }
-
-
         }
     }
 
