@@ -22,10 +22,9 @@
 即两个位置之间能够联通的最短距离，常用于地图寻路和游戏寻路中。
 - 方法：  
 通过曼哈顿距离进行估值。   
-示例图：  
-
-
-
+- 示例图：     
+ <div align=center><img src="https://github.com/tanglongfei/SuanFa/blob/master/image/%E5%AF%BB%E8%B7%AF%E6%BC%94%E7%A4%BA.gif?raw=true"/></div>
+ 
 ### 5.哈夫曼树  
 - 定义：  
 
