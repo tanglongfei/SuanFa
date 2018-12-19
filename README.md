@@ -66,7 +66,6 @@
                     node.leftChind.parent = null;
                     root = node.leftChind;
                     node.leftChind = null;
-
                 } else {
                     if (node == parent.leftChind) {//要删除的是父亲的左边
                         node.leftChind.parent = parent;
@@ -77,10 +76,7 @@
                     }
                     node.leftChind = null;
                     node.parent = null;
-
-
                 }
-
             } else if (node.leftChind == null && node.rightChind != null) {
                 //3.只有右孩子
                 if (parent == null) {//要删除的是根结点
@@ -96,33 +92,24 @@
                         node.rightChind.parent = parent;
                         parent.rightChind = node.rightChind;
                     }
-
                     node.parent = null;
                     node.rightChind = null;
-
                 }
-
             } else {
                 //4.有两个孩子
                 if (node.rightChind.leftChind == null) {//如果被删除结点的右子树的左子树为空，则直接补上
                     node.rightChind.leftChind = node.leftChind;
-
                     if (node.parent == null) {
                         root = node.rightChind;
-
                     } else {
                         if (node.leftChind == node) {
                             parent.leftChind = node.rightChind;
                         } else {
                             parent.rightChind = node.rightChind;
-
                         }
                         node.parent = null;
                     }
-
-
                 } else {//否则就补上被删除结点的右子树的左子树中最小的一个
-
                     TreeNode leftTreeNode = getMinLeftTreeNode(node.rightChind);
                     leftTreeNode.parent.leftChind = null;
                     leftTreeNode.leftChind = node.leftChind;
@@ -137,22 +124,67 @@
                         } else {
                             parent.rightChind = leftTreeNode;
                         }
-
                         node.parent = null;
                     }
-
                 }
-
                 node.leftChind = null;
                 node.rightChind = null;
-
             }
-
-
         }
     }
 
 ```
-### 7.平衡二叉树（二叉树的左旋，右旋转等）
+### 7.平衡二叉树  
+- 定义：  
+每个节点的左子树和右子树的高度差最大为1的二叉排序树。  
+- 生成：  
+1.按照二叉排序树的插入方法进行插入。  
+2.每个节点插入后都要回溯判读平衡型，如果某个节点的平衡因子（左子树高度-右子树高度）=2，左平衡调整，=-2，右平衡调整。  
+- 调整过程：   
+( LH = 1,RH = -1,EH = 0)
+
+左平衡（即节点t的不平衡是因为左子树过深）：   
+1.如果新的节点插入到t的左孩子的左子树中，直接t右旋。   
+2.如果新的节点插入到t的左孩子的右子树中，先t的左孩子tl左旋，然后t右旋。但是这种情况调整平衡因子需要分三种情况：  
+(1).当t的左孩子的右子树根节点的balance=RIGHT_HIGH时：
+```
+t.balance = EH;
+tl.balance = LH;
+tlr.balance = EH;
+```  
+(2).当t的左孩子的右子树根节点的balance=LEFT_HIGH时：
+```
+t.balance = RH;
+tl.balance = EH;
+tlr.balance = EH;
+```
+(3).当t的左孩子的右子树根节点的balance=EQUAL_HIGH时：  
+```
+t.balance = EH;
+tl.balance = LH;
+tlr.balance = EH;
+```
+右平衡（即节点t的不平衡是因为右子树过深）：  
+1.如果新的节点插入到t的右孩子的右子树中，直接t左旋。    
+2.如果新的节点插入到t的右孩子的左子树中，先t的右孩子tr右旋，然后t左旋。但是这种情况调整平衡因子需要分三种情况：  
+(1).当t的右孩子的左子树根节点的balance=RIGHT_HIGH时：
+```
+t.balance = LH;
+tr.balance = EH;
+trl.balance = EH;
+```
+(2).当t的右孩子的左子树根节点的balance=LEFT_HIGH时：  
+```
+t.balance = EH;
+tr.balance = RH;
+trl.balance = EH;
+```
+(3).当t的右孩子的左子树根节点的balance=EQUAL_HIGH时：
+```
+t.balance = EH;
+tr.balance = EH;
+trl.balance = EH;
+```
+### 8.红黑树
 
 ## 后续还在不断学习更新······
