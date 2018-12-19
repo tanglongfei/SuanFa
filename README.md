@@ -140,12 +140,50 @@
 - 生成：  
 1.按照二叉排序树的插入方法进行插入。  
 2.每个节点插入后都要回溯判读平衡型，如果某个节点的平衡因子（左子树高度-右子树高度）=2，左平衡调整，=-2，右平衡调整。  
-- 调整过程：  
+- 调整过程： 
+
 左平衡（即节点t的不平衡是因为左子树过深）：   
 1.如果新的节点插入到t的左孩子的左子树中，直接t右旋。   
-2.如果新的节点插入到t的左孩子的右子树中，先t的左孩子tl左旋，然后t右旋。但是这种情况调整平衡因子需要分三种情况：      
+2.如果新的节点插入到t的左孩子的右子树中，先t的左孩子tl左旋，然后t右旋。但是这种情况调整平衡因子需要分三种情况：  
+
+(1).当t的左孩子的右子树根节点的balance=RIGHT_HIGH时：
+```
+t.balance = EH;
+tl.balance = LH;
+tlr.balance = EH;
+```  
+(2).当t的左孩子的右子树根节点的balance=LEFT_HIGH时：
+```
+t.balance = RH;
+tl.balance = EH;
+tlr.balance = EH;
+```
+(3).当t的左孩子的右子树根节点的balance=EQUAL_HIGH时：  
+```
+t.balance = EH;
+tl.balance = LH;
+tlr.balance = EH;
+```
 右平衡（即节点t的不平衡是因为右子树过深）：  
 1.如果新的节点插入到t的右孩子的右子树中，直接t左旋。    
-2.如果新的节点插入到t的右孩子的左子树中，先t的右孩子tr右旋，然后t左旋。但是这种情况调整平衡因子需要分三种情况：    
+2.如果新的节点插入到t的右孩子的左子树中，先t的右孩子tr右旋，然后t左旋。但是这种情况调整平衡因子需要分三种情况：  
+(1).当t的右孩子的左子树根节点的balance=RIGHT_HIGH时：
+```
+t.balance = LH;
+tr.balance = EH;
+trl.balance = EH;
+```
+(2).当t的右孩子的左子树根节点的balance=LEFT_HIGH时：  
+```
+t.balance = EH;
+tr.balance = RH;
+trl.balance = EH;
+```
+(3).当t的右孩子的左子树根节点的balance=EQUAL_HIGH时：
+```
+t.balance = EH;
+tr.balance = EH;
+trl.balance = EH;
+```
 
 ## 后续还在不断学习更新······
