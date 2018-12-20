@@ -1,8 +1,17 @@
 # SuanFa
 算法库，记录日常学习的数据结构和相关算法
 ## 学习练习所做，只为能更好的理解相关知识。
-## 大部分代码都在JavaTest中
-[TOC]  
+## 大部分代码都在JavaTest中  
+
+- [Abstract](#1.基础排序算法（冒泡，选择))  
+- [Preface](#preface)  
+- [Design idea and innovation point](#design-idea-and-innovation-point)  
+  - [Background](#background) 
+  - [Design inspirations](#design-inspirations) 
+  - [Innovation point](#innovation-point)  
+  - [Developmental vision](#developmental-vision) 
+
+
 ### 1.基础排序算法（冒泡，选择） 
 #### 冒泡算法  
 原理：  
