@@ -51,7 +51,7 @@
 
 方法：  
 声明两个指针，低指针指向数组第一项，高指针指向数组最后一项，然后取出第一项为对比值，先与高指针指向的值对比，暂存值小，高指针后移一位，继续比较高指针，直到找到比暂存之小的，将高指针指向的值放入低指针指向的索引位置，然后比较低指针，比暂存值小，低指针前移一位，直到找到比暂存值大的，将低指针指向的元素移到高指针指向的索引位置。 直到两指针重合，将暂存之放入重合的指针指向的索引，此时，改值左侧都比它小，右侧都比它大，将数组从该索引处分为两端，每一段都递归重复该操作，直到高指针索引-低指针索引<=0，便return，排序便完成。  
-- 示例图：   
+- 示例图   
 <div align=center><img src="https://github.com/tanglongfei/SuanFa/blob/master/image/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E5%9B%BE%E8%A7%A3.gif?raw=true"/></div>  
 
 #### 归并算法  
@@ -80,7 +80,7 @@
 
 方法：  
 通过曼哈顿距离进行估值。   
-- 示例图：     
+- 示例图     
  <div align=center><img src="https://github.com/tanglongfei/SuanFa/blob/master/image/%E5%AF%BB%E8%B7%AF%E6%BC%94%E7%A4%BA.gif?raw=true"/></div>
  
 ### 6.哈夫曼树  
@@ -170,7 +170,8 @@ trl.balance = EH;
 2.根节点为黑色。  
 3.所有NULL节点成为叶子节点，且认为颜色为黑。  
 4.所有红节点的子节点都为黑色。  
-5.从任一节点到其叶子节点的所有路径上都包含相同数目的黑节点。   
+5.从任一节点到其叶子节点的所有路径上都包含相同数目的黑节点。  
+- 示例图  
 <div align="center">
 <img src="https://github.com/tanglongfei/SuanFa/blob/master/image/%E7%BA%A2%E9%BB%91%E6%A0%91.jpg"/>
 </div>
@@ -190,7 +191,7 @@ Hashtable TreeSet TreeMap，本人学习是参考TreeMap源码进行的。
   最后要将根节点的颜色涂成黑色。  
   （2）如果父节点是祖父节点的右孩子，和上面情况一样，将左全部换成右即可。  
     
-- 参考TreeMap源码：
+- 参考TreeMap源码
 ```
  /** From CLR */
     private void fixAfterInsertion(TreeMapEntry<K,V> x) {
