@@ -4,7 +4,7 @@
 ## 大部分代码都在JavaTest中  
 
 - [Abstract](###1)  
-- [Preface](#preface)  
+- [Preface](###2.分治法（二分查找，快速排序，归并算法）)  
 - [Design idea and innovation point](#design-idea-and-innovation-point)  
 
 ### 1.基础排序算法（冒泡，选择） 
