@@ -150,5 +150,8 @@ trl.balance = EH;
 2.根节点为黑色。  
 3.所有NULL节点成为叶子节点，且认为颜色为黑。  
 4.所有红节点的子节点都为黑色。  
-5.从任一节点到其叶子节点的所有路径上都包含相同数目的黑节点。  
+5.从任一节点到其叶子节点的所有路径上都包含相同数目的黑节点。   
+<div align="center">
+<img src="https://github.com/tanglongfei/SuanFa/blob/master/image/%E7%BA%A2%E9%BB%91%E6%A0%91.jpg"/>
+</div>
 ## 后续还在不断学习更新······
