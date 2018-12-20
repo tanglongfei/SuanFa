@@ -4,7 +4,7 @@
 ## 大部分代码都在JavaTest中  
 
 - [Abstract](###1)  
-- [Preface](####麻将排序)  
+- [Preface](#麻将排序)  
 - [Design idea and innovation point](#design-idea-and-innovation-point)  
 
 ### 1.基础排序算法（冒泡，选择） 
