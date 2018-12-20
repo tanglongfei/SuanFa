@@ -3,7 +3,7 @@
 ## 学习练习所做，只为能更好的理解相关知识。
 ## 大部分代码都在JavaTest中  
 
-- [Abstract](#1.基础排序算法（冒泡，选择))  
+- [Abstract](#1.基础排序算法)  
 - [Preface](#preface)  
 - [Design idea and innovation point](#design-idea-and-innovation-point)  
   - [Background](#background) 
