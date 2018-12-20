@@ -237,6 +237,144 @@ Hashtable TreeSet TreeMap，本人学习是参考TreeMap源码进行的。
 ```
 
 删除节点：  
-1.
+先进行二叉树排序的删除操作，然后已替换节点作为当前节点进行后面的平衡操作：  
+1.当前节点是红色，直接把当前节点染成黑色，结束。  
+2.当前节点x是黑色：  
+（1）如果当前节点是父节点的左孩子：  
+情况1:若当前节点是根节点，什么都不用做。  
+情况2:若当前节点x的兄弟节点是红色（此时父节点和兄弟节点分别为黑），直接把父节点染成红色，兄弟节点染成黑色，对父节点进行左旋，重新设置x的兄弟节点。  
+情况3:让前节点x的兄弟节点是黑色，这是又得分三种情况：  
+  &emsp;情况3.1：兄弟节点的两个孩子都是黑色，则将x的兄弟节点设为红色，设置x的父节点为新的x节点。  
+  &emsp;情况3.2：兄弟节点的右孩子为黑色，左孩子是红色，则将x兄弟节点的左孩子设为黑色，x兄弟节点设置为红色，x的兄弟节点右旋，右旋后重新设置x的兄弟节点。     
+  &emsp;情况3.3：兄弟节点的右孩子为红色，则把兄弟节点染成当前节点父节点颜色，把当前节点父节点染成黑色，兄弟节点右孩子染成黑色，再以当前节点的父节点为支点进行左旋，算法结算。  
+  （2）被删除节点是父节点的右孩子，则把上面的左设置为右即可。  
+若看不懂文字解释，直接看TreeMap源码即可，TreeMap源码写的很清楚。  
+
+- 参考TreeMap源码  
+```
+   public V remove(Object key) {
+        TreeMapEntry<K,V> p = getEntry(key);
+        if (p == null)
+            return null;
+
+        V oldValue = p.value;
+        deleteEntry(p);
+        return oldValue;
+    }
+    
+     /**
+     * Delete node p, and then rebalance the tree.
+     */
+    private void deleteEntry(TreeMapEntry<K,V> p) {
+        modCount++;
+        size--;
+
+        // If strictly internal, copy successor's element to p and then make p
+        // point to successor.
+        if (p.left != null && p.right != null) {
+            TreeMapEntry<K,V> s = successor(p);
+            p.key = s.key;
+            p.value = s.value;
+            p = s;
+        } // p has 2 children
+
+        // Start fixup at replacement node, if it exists.
+        TreeMapEntry<K,V> replacement = (p.left != null ? p.left : p.right);
+
+        if (replacement != null) {
+            // Link replacement to parent
+            replacement.parent = p.parent;
+            if (p.parent == null)
+                root = replacement;
+            else if (p == p.parent.left)
+                p.parent.left  = replacement;
+            else
+                p.parent.right = replacement;
+
+            // Null out links so they are OK to use by fixAfterDeletion.
+            p.left = p.right = p.parent = null;
+
+            // Fix replacement
+            if (p.color == BLACK)
+                fixAfterDeletion(replacement);
+        } else if (p.parent == null) { // return if we are the only node.
+            root = null;
+        } else { //  No children. Use self as phantom replacement and unlink.
+            if (p.color == BLACK)
+                fixAfterDeletion(p);
+
+            if (p.parent != null) {
+                if (p == p.parent.left)
+                    p.parent.left = null;
+                else if (p == p.parent.right)
+                    p.parent.right = null;
+                p.parent = null;
+            }
+        }
+    }
+    
+    /** From CLR */
+    private void fixAfterDeletion(TreeMapEntry<K,V> x) {
+        while (x != root && colorOf(x) == BLACK) {
+            if (x == leftOf(parentOf(x))) {
+                TreeMapEntry<K,V> sib = rightOf(parentOf(x));
+
+                if (colorOf(sib) == RED) {
+                    setColor(sib, BLACK);
+                    setColor(parentOf(x), RED);
+                    rotateLeft(parentOf(x));
+                    sib = rightOf(parentOf(x));
+                }
+
+                if (colorOf(leftOf(sib))  == BLACK &&
+                    colorOf(rightOf(sib)) == BLACK) {
+                    setColor(sib, RED);
+                    x = parentOf(x);
+                } else {
+                    if (colorOf(rightOf(sib)) == BLACK) {
+                        setColor(leftOf(sib), BLACK);
+                        setColor(sib, RED);
+                        rotateRight(sib);
+                        sib = rightOf(parentOf(x));
+                    }
+                    setColor(sib, colorOf(parentOf(x)));
+                    setColor(parentOf(x), BLACK);
+                    setColor(rightOf(sib), BLACK);
+                    rotateLeft(parentOf(x));
+                    x = root;
+                }
+            } else { // symmetric
+                TreeMapEntry<K,V> sib = leftOf(parentOf(x));
+
+                if (colorOf(sib) == RED) {
+                    setColor(sib, BLACK);
+                    setColor(parentOf(x), RED);
+                    rotateRight(parentOf(x));
+                    sib = leftOf(parentOf(x));
+                }
+
+                if (colorOf(rightOf(sib)) == BLACK &&
+                    colorOf(leftOf(sib)) == BLACK) {
+                    setColor(sib, RED);
+                    x = parentOf(x);
+                } else {
+                    if (colorOf(leftOf(sib)) == BLACK) {
+                        setColor(rightOf(sib), BLACK);
+                        setColor(sib, RED);
+                        rotateLeft(sib);
+                        sib = leftOf(parentOf(x));
+                    }
+                    setColor(sib, colorOf(parentOf(x)));
+                    setColor(parentOf(x), BLACK);
+                    setColor(leftOf(sib), BLACK);
+                    rotateRight(parentOf(x));
+                    x = root;
+                }
+            }
+        }
+
+        setColor(x, BLACK);
+    }
+```
 
 ## 后续还在不断学习更新······
