@@ -174,4 +174,62 @@ trl.balance = EH;
 <div align="center">
 <img src="https://github.com/tanglongfei/SuanFa/blob/master/image/%E7%BA%A2%E9%BB%91%E6%A0%91.jpg"/>
 </div>
+
+应用：  
+Hashtable TreeSet TreeMap，本人学习是参考TreeMap源码进行的。  
+
+插入节点：  
+1.先按照二叉排序树的方式插入一个节点（红色）  
+2.如果插入的是根节点，直接将节点涂黑。  
+3.如果插入的节点的父节点是黑色，直接插入，不用调整。  
+4.如果插入的节点的父节点是红色：  
+- 参考TreeMap源码：
+```
+ /** From CLR */
+    private void fixAfterInsertion(TreeMapEntry<K,V> x) {
+        x.color = RED;
+
+        while (x != null && x != root && x.parent.color == RED) {
+            if (parentOf(x) == leftOf(parentOf(parentOf(x)))) {
+                TreeMapEntry<K,V> y = rightOf(parentOf(parentOf(x)));
+                if (colorOf(y) == RED) {
+                    setColor(parentOf(x), BLACK);
+                    setColor(y, BLACK);
+                    setColor(parentOf(parentOf(x)), RED);
+                    x = parentOf(parentOf(x));
+                } else {
+                    if (x == rightOf(parentOf(x))) {
+                        x = parentOf(x);
+                        rotateLeft(x);
+                    }
+                    setColor(parentOf(x), BLACK);
+                    setColor(parentOf(parentOf(x)), RED);
+                    rotateRight(parentOf(parentOf(x)));
+                }
+            } else {
+                TreeMapEntry<K,V> y = leftOf(parentOf(parentOf(x)));
+                if (colorOf(y) == RED) {
+                    setColor(parentOf(x), BLACK);
+                    setColor(y, BLACK);
+                    setColor(parentOf(parentOf(x)), RED);
+                    x = parentOf(parentOf(x));
+                } else {
+                    if (x == leftOf(parentOf(x))) {
+                        x = parentOf(x);
+                        rotateRight(x);
+                    }
+                    setColor(parentOf(x), BLACK);
+                    setColor(parentOf(parentOf(x)), RED);
+                    rotateLeft(parentOf(parentOf(x)));
+                }
+            }
+        }
+        root.color = BLACK;
+    }
+
+```
+
+删除节点：  
+1.
+
 ## 后续还在不断学习更新······
