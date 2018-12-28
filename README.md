@@ -98,7 +98,8 @@ JavaTest FenZhi
 
 ### 3.自定义单向，双向链表
 #### 双向链表和单向链表  
-<font color=#00ffff size=72>代码位置： JavaTest Linked包 </font>  
+代码位置： JavaTest Linked包 
+<font face="黑体">我是黑体字</font>
 
 区别：   
 双向链表为每个节点都有三段，包括数据、left引用指向前一个结点、right引用指向下一个结点。而单向列表只有数据和right引用指向下一个结点，没有left引用。  
