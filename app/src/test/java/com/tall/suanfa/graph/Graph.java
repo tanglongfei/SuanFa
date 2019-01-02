@@ -170,6 +170,7 @@ public class Graph {
             isVisited[fn] = true;
             System.out.println("viested vertice" + fn);
             queue.offer(fn);
+
         }
 
         //开始把后面的邻接点都入队
